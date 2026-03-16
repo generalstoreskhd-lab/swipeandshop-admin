@@ -5,7 +5,12 @@ import { Image, Text, TextInput, View, ScrollView } from "react-native";
 import logo from "../assets/images/logo.png";
 import { LeafletMap } from "../components/LeafletMap";
 
-export default function AddressScreen() {
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigation/Rootnavigation";
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Address'>;
+
+export default function AddressScreen({ navigation }: Props) {
 
     const [error, setError] = useState("");
     return (
@@ -18,19 +23,33 @@ export default function AddressScreen() {
                     resizeMode="contain"
                 />
                 <Text className="text-3xl font-bold text-slate-900 mb-4">Where should we deliver ?</Text>
-                <TextInput
-                    placeholder="Enter the address"
-                    multiline={true}
-                    numberOfLines={4}
-                    textAlignVertical="top"
-                    className={`${error ? "border-red-400" : "border-slate-200"} border-2 border-slate-200 rounded-xl px-4 py-3 w-full h-32 text-start`}
-                />
                 <LeafletMap />
 
-                <TextInput
-                    placeholder="Landmark"
-                    className="border-slate-200 border-2 rounded-xl px-4 py-3 w-full mb-4"
-                />
+                <View className="w-full flex flex-col gap-y-2 mt-8">
+                    <Text className="text-sm font-semibold text-slate-500 ml-1">Apartment, Street or House No.</Text>
+                    <TextInput
+                        aria-label="Enter apartment or street"
+                        placeholder="Enter apartment or street"
+                        className={`${error ? "border-red-400" : "border-slate-200"} border-2 border-slate-200 rounded-xl px-4 py-3 w-full  text-start`}
+                    />
+                </View>
+
+                <View className="w-full flex flex-col gap-y-2">
+                    <Text className="text-sm font-semibold text-slate-500 ml-1">Locality / Area</Text>
+                    <TextInput
+                        aria-label="Enter the locality"
+                        placeholder="Enter the locality"
+                        className={`${error ? "border-red-400" : "border-slate-200"} border-2 border-slate-200 rounded-xl px-4 py-3 w-full text-start`}
+                    />
+                </View>
+
+                <View className="w-full flex flex-col gap-y-2">
+                    <Text className="text-sm font-semibold text-slate-500 ml-1">Landmark (Optional)</Text>
+                    <TextInput
+                        placeholder="Landmark"
+                        className="border-slate-200 border-2 rounded-xl px-4 py-3 w-full mb-4"
+                    />
+                </View>
 
 
                 <View className="h-4" />

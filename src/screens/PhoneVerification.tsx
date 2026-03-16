@@ -7,7 +7,12 @@ import logo from "../assets/images/logo.png";
 import lock from "../assets/images/lock.png";
 import CustomPresseableText from "../components/CustomPresseable";
 
-export default function PhoneVerification() {
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigation/Rootnavigation";
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Verify'>;
+
+export default function PhoneVerification({ navigation }: Props) {
     return (
         <RegisterLayout>
             <View className="h-full flex-col items-center justify-start p-10 pb-16">
@@ -40,7 +45,7 @@ export default function PhoneVerification() {
                         <Text className="text-md font-light text-slate-600">Didn't recieve the code</Text>
                         <Text className="text-md font-semibold text-sky-500">Resend Code</Text>
                     </View>
-                    <CustomPresseableText text="Verify" stretch={true} onPress={() => { console.log("Verify") }} />
+                    <CustomPresseableText text="Verify" stretch={true} onPress={() => navigation.navigate("Name")} />
 
                 </View>
             </View>

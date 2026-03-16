@@ -11,8 +11,12 @@ import {
 import logo from "../assets/images/logo.png";
 import { RegisterLayout } from "../layouts/RegisterLayout";
 import CustomPresseableText from "../components/CustomPresseable";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigation/Rootnavigation";
 
-export const RegisterScreen = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+
+export default function RegisterScreen({ navigation }: Props) {
     const [phone, setPhone] = useState("");
     const [error, setError] = useState("");
 
@@ -21,8 +25,7 @@ export const RegisterScreen = () => {
             setError("Please enter a valid phone number.");
             return;
         }
-        setError("");
-        // TODO: navigate to OTP screen
+        navigation.navigate("Verify");
     };
 
     return (
