@@ -31,7 +31,9 @@ export interface Product {
     discount?: number;
     categoryId: string;
     images?: string[];
+    unit: 'PACKET' | 'KG' | 'LITRE';
     isAvailable: boolean;
+    stockQuantity: number;
     createdAt?: Date | number;
     updatedAt?: Date | number;
 }

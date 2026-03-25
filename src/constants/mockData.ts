@@ -9,7 +9,9 @@ export const MOCK_PRODUCTS: Product[] = [
         price: 45,
         categoryId: 'dairy',
         images: ['https://img.freepik.com/free-photo/milk-bottle-isolated_1203-2415.jpg'],
+        unit: 'LITRE',
         isAvailable: true,
+        stockQuantity: 25,
     },
     {
         id: '2',
@@ -19,7 +21,9 @@ export const MOCK_PRODUCTS: Product[] = [
         price: 120,
         categoryId: 'snacks',
         images: ['https://img.freepik.com/free-photo/cookies-isolated-white-background_1203-1629.jpg'],
+        unit: 'PACKET',
         isAvailable: true,
+        stockQuantity: 50,
     },
     {
         id: '3',
@@ -29,7 +33,9 @@ export const MOCK_PRODUCTS: Product[] = [
         price: 850,
         categoryId: 'grains',
         images: ['https://img.freepik.com/free-photo/rice-burlap-sack-isolated-white-background_1203-2454.jpg'],
+        unit: 'KG',
         isAvailable: true,
+        stockQuantity: 15,
     },
     {
         id: '4',
@@ -39,7 +45,9 @@ export const MOCK_PRODUCTS: Product[] = [
         price: 450,
         categoryId: 'household',
         images: ['https://img.freepik.com/free-photo/laundry-detergent-bottle-isolated_1203-2426.jpg'],
+        unit: 'PACKET',
         isAvailable: true,
+        stockQuantity: 10,
     },
     {
         id: '5',
@@ -49,7 +57,9 @@ export const MOCK_PRODUCTS: Product[] = [
         price: 50,
         categoryId: 'stationery',
         images: ['https://img.freepik.com/free-photo/pen-isolated-white-background_1203-2334.jpg'],
+        unit: 'PACKET',
         isAvailable: false,
+        stockQuantity: 0,
     },
     {
         id: '6',
@@ -59,6 +69,8 @@ export const MOCK_PRODUCTS: Product[] = [
         price: 180,
         categoryId: 'produce',
         images: ['https://img.freepik.com/free-photo/red-apple-isolated-white-background_1203-2418.jpg'],
+        unit: 'KG',
         isAvailable: true,
+        stockQuantity: 30,
     },
 ];
