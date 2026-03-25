@@ -7,12 +7,7 @@ import { hashPassword } from "../authentication/authUtils";
 import { useAppDispatch } from "../store/hooks";
 import { login } from "../store/authSlice";
 import { auth, db } from "../config/firebaseconfig";
-import { 
-    signInWithEmailAndPassword, 
-    createUserWithEmailAndPassword, 
-    updateProfile 
-} from "firebase/auth";
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { signInAdmin, registerAdmin } from "../firebase/auth";
 
 export default function AdminLoginScreen({ navigation }: any) {
     const dispatch = useAppDispatch();
@@ -31,38 +26,21 @@ export default function AdminLoginScreen({ navigation }: any) {
 
         setIsLoading(true);
         try {
-            let userUid = "";
-            let displayName = name;
-
+            let adminProfile;
             if (isLogin) {
-                // LOGIN
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                userUid = userCredential.user.uid;
-                
-                // Fetch admin data from Firestore
-                const adminDoc = await getDoc(doc(db, "users", "admin_group", "admins", userUid));
-                if (adminDoc.exists()) {
-                    displayName = adminDoc.data().name;
-                }
+                adminProfile = await signInAdmin(email, password);
             } else {
-                // REGISTER
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                userUid = userCredential.user.uid;
-                
-                await updateProfile(userCredential.user, { displayName: name });
-
-                // Save admin data in subcollection
-                await setDoc(doc(db, "users", "admin_group", "admins", userUid), {
-                    name,
-                    email,
-                    phone,
-                    role: 'admin',
-                    createdAt: serverTimestamp()
-                });
+                adminProfile = await registerAdmin(name, email, phone, password);
             }
 
-            dispatch(login({ name: displayName || "Admin", email }));
-            navigation.navigate("Home");
+            dispatch(login({ 
+                name: adminProfile.name || "Admin", 
+                email: adminProfile.email,
+                role: 'admin'
+            }));
+            
+            // Home is now only accessible via conditional rendering in App.tsx
+            // so we don't strictly need to navigate, but it helps trigger the re-render correctly
         } catch (error: any) {
             console.error(error);
             Alert.alert("Auth Error", error.message || "Something went wrong.");
