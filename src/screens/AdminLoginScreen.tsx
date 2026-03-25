@@ -83,9 +83,6 @@ export default function AdminLoginScreen({ navigation }: any) {
                         style={{ width: 80, height: 80 }}
                         resizeMode="contain"
                     />
-                    <Pressable onPress={() => navigation.navigate("Home")}>
-                        <Text className="text-sky-500 text-base font-semibold">Skip</Text>
-                    </Pressable>
                 </View>
 
                 {/* Unified Form */}

@@ -17,7 +17,25 @@ import MainTabNavigator from './navigation/MainTabNavigator';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
+import { useAppSelector } from './store/hooks';
+
 const Stack = createNativeStackNavigator();
+
+function AppLayout() {
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                {isLoggedIn ? (
+                    <Stack.Screen name="Home" component={MainTabNavigator} />
+                ) : (
+                    <Stack.Screen name="AdminLogin" component={AdminLoginScreen} />
+                )}
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
 
 function App() {
     const [fontsLoaded, fontError] = useFonts({
@@ -44,12 +62,7 @@ function App() {
     return (
         <Provider store={store}>
             <SafeAreaProvider onLayout={onLayoutRootView}>
-                <NavigationContainer>
-                    <Stack.Navigator screenOptions={{ headerShown: false }}>
-                        <Stack.Screen name="AdminLogin" component={AdminLoginScreen} />
-                        <Stack.Screen name="Home" component={MainTabNavigator} />
-                    </Stack.Navigator>
-                </NavigationContainer>
+                <AppLayout />
             </SafeAreaProvider>
         </Provider>
     );
