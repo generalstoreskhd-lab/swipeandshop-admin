@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "admin",
+    "slug": "admin",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
-    "scheme": "client",
+    "scheme": "admin",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./src/assets/expo.icon"

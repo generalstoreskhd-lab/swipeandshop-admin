@@ -4,16 +4,21 @@ import { Text, View } from 'react-native';
 import { registerRootComponent } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AdminLoginScreen from './screens/AdminLoginScreen';
+import MainTabNavigator from './navigation/MainTabNavigator';
 
-
-import RootNavigation from './navigation/Rootnavigation';
+const Stack = createNativeStackNavigator();
 
 function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <RootNavigation />
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="AdminLogin" component={AdminLoginScreen} />
+                    <Stack.Screen name="Home" component={MainTabNavigator} />
+                </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
     );
